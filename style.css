@@ -25,6 +25,7 @@ body {
     font-size: 5vmin;
     right: 50%;
     top: 27%;
+    transform: translate(50%, -50%);
 }
 
 .start-screen {

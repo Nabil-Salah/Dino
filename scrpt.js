@@ -11,6 +11,12 @@ const startScreenElem = document.querySelector("[data-start-screen]");
 let speedScale = 1;
 let lastTime;
 let score;
+if (window.localStorage.getItem("score")) {
+    scoreElem.textContent = `Max Score: ${window.localStorage.getItem("score")}`;
+} else {
+    scoreElem.textContent = "0";
+
+}
 setPixelToWorldScale();
 window.addEventListener("resize", setPixelToWorldScale);
 document.addEventListener("keydown", start, { once: true });
@@ -55,6 +61,10 @@ function updateScore(delta) {
     //for every 100ms passes the score inc by one
     score += delta * 0.01;
     scoreElem.textContent = Math.floor(score);
+    if (window.localStorage.getItem("score")) {
+        window.localStorage.setItem("score", Math.max(window.localStorage.getItem("score"), Math.floor(Math.floor(score))));
+    } else
+        window.localStorage.setItem("score", Math.floor(score));
 }
 function updateSpeedScale(delta) {
     speedScale += delta * SCALE_INC;
